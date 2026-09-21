@@ -46,12 +46,14 @@ const gameController = (function () {
         if (gameOver) {
             return;
         }
+        let won = false;
         if (gameboard.placeMark(index, players[curPlayer].marker)) {
-            checkWinner();
+            won = checkWinner();
             if (!gameOver) {
                 switchTurn();
             }
         }    
+        return won;
     }
 
     function checkWinner() {
@@ -96,11 +98,16 @@ const gameController = (function () {
         gameboard.resetBoard();
     }
 
+    function isGameOver() {
+        return gameOver;
+    }
+
     return {
         playRound,
         getCurPlayer,
         checkWinner,
-        startGame
+        startGame,
+        isGameOver
     }
 })();
 
@@ -115,8 +122,16 @@ const displayController = (function () {
         squares.push(document.getElementById(squareId));
 
         document.getElementById(squareId).addEventListener("click", function() {
-            gameController.playRound(i);
+            const didWin = gameController.playRound(i);
             render();
+
+            if(gameController.isGameOver()) {
+                if (didWin) {
+                    results.textContent = `${gameController.getCurPlayer().name} wins!`;
+                } else {
+                    results.textContent = "It's a tie!";
+                }
+            }
         })
     }
 
@@ -127,6 +142,35 @@ const displayController = (function () {
             squares[i].textContent = currentBoard[i];
         }
     }
+
+    const startBtn = document.getElementById("start-btn");
+    const results = document.getElementById("results");
+
+    startBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        const name1 = document.getElementById("player1").value;
+        const name2 = document.getElementById("player2").value;
+
+        if (name1 != "" && name2 != "") {
+            document.getElementById("p1-label").textContent = name1;
+            document.getElementById("p2-label").textContent = name2;
+            gameController.startGame(name1, name2);
+        } else {
+            document.getElementById("p1-label").textContent = "Player 1";
+            document.getElementById("p2-label").textContent = "Player 2";
+            gameController.startGame("Player 1", "Player 2");
+            
+        }
+        
+        results.textContent = "";
+        document.getElementById("player1").value = "";
+        document.getElementById("player2").value = "";
+        startBtn.textContent = "Restart";
+        render();
+
+        
+    });
 
     return {
         render
