@@ -26,13 +26,11 @@ const gameboard = (function () {
 function createPlayer(name, marker) {
     return {
         name, marker
-    };
+    }
 };
 
 const gameController = (function () {
-    const player1 = createPlayer("Player 1", "X");
-    const player2 = createPlayer("Player 2", "O");
-    let players = [player1, player2];
+    let players = [];
     let curPlayer = 0;
     let gameOver = false;
 
@@ -89,10 +87,20 @@ const gameController = (function () {
         return false;
     }
 
+    function startGame(p1, p2) {
+        const player1 = createPlayer(p1, "X");
+        const player2 = createPlayer(p2, "O");
+        players = [player1, player2];
+        curPlayer = 0;
+        gameOver = false;
+        gameboard.resetBoard();
+    }
+
     return {
         playRound,
         getCurPlayer,
-        checkWinner
+        checkWinner,
+        startGame
     }
 })();
 
