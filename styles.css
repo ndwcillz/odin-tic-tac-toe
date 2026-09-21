@@ -1,2 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+#game-container {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    gap: 30px;
+}
+
+
+.square {
+    height: 100px;
+    width: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
