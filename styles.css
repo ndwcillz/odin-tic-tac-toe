@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -11,6 +12,9 @@ body {
 
     width: 100vw;
     height: 100vh;
+    flex-direction: column;
+
+    background-color: rgb(27, 25, 25);
 }
 
 #game-container {
@@ -19,17 +23,29 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 
-    gap: 30px;
+    gap: 10px;
+    background-color: aliceblue;
+    margin-top: 100px;
 }
 
 
 .square {
-    height: 100px;
-    width: 100px;
+    height: 130px;
+    width: 130px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    font-weight: 800;
+    font-size: 40px;
+    color: rgb(237, 212, 212);
+    background-color: rgb(27, 25, 25);
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 60px;
 }
 
 
