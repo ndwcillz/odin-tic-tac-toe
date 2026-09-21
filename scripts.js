@@ -122,6 +122,10 @@ const displayController = (function () {
         squares.push(document.getElementById(squareId));
 
         document.getElementById(squareId).addEventListener("click", function() {
+            if (gameController.isGameOver()) {
+                return;
+            }
+
             const didWin = gameController.playRound(i);
             render();
 
