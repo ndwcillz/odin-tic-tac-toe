@@ -96,3 +96,32 @@ const gameController = (function () {
     }
 })();
 
+
+
+const displayController = (function () {
+    const squares = [];
+
+    for (let i = 0; i < 9; i++) {
+        const squareId = `${i}-square`;
+
+        squares.push(document.getElementById(squareId));
+
+        document.getElementById(squareId).addEventListener("click", function() {
+            gameController.playRound(i);
+            render();
+        })
+    }
+
+    function render() {
+        let currentBoard = gameboard.readBoard();
+
+        for (let i = 0; i < 9; i++) {
+            squares[i].textContent = currentBoard[i];
+        }
+    }
+
+    return {
+        render
+    }
+
+})();
